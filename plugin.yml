@@ -1,0 +1,12 @@
+name: UOConverter
+main: ru.alastar.Main
+author: Alastar
+description: UOmap to minecraft
+version: 1.0
+depend: [WorldEdit]
+load: POSTWORLD
+commands:
+     convertuo:
+       description: creates copy of uo map in current world
+       permission: UOC.convert
+       usage: /convertuo <filename>
