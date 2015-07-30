@@ -11,6 +11,36 @@ public class LandInfo {
     byte subId;
     Biome biome;
     boolean fill;
+    private boolean modded = false;
+    private int modId;
+
+    public LandInfo(int modId )
+    {
+        this.modded = true;
+        this.modId = modId;
+        this.subId = 0;
+        this.biome = Biome.BEACH;
+        this.fill = false;
+    }
+
+    public LandInfo(int m, byte s, Biome b, boolean f)
+    {
+        this.modded = true;
+        this.modId = m;
+        this.subId = s;
+        this.biome = b;
+        this.fill = f;
+    }
+
+    public LandInfo(int modId, byte sub)
+    {
+        this.modded = true;
+        this.modId = modId;
+        this.subId = sub;
+        this.biome = Biome.BEACH;
+        this.fill = false;
+    }
+
 
 
     public LandInfo(Material m, byte sub)
@@ -35,5 +65,21 @@ public class LandInfo {
         this.subId = s;
         this.biome = b;
         this.fill = f;
+    }
+
+    public boolean isModded() {
+        return modded;
+    }
+
+    public void setModded(boolean modded) {
+        this.modded = modded;
+    }
+
+    public int getModId() {
+        return modId;
+    }
+
+    public void setModId(int modId) {
+        this.modId = modId;
     }
 }

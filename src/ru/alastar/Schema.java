@@ -9,7 +9,6 @@ import java.util.HashMap;
  */
 public class Schema {
     public HashMap<Vector, LandInfo> blocks; //pos mod, block info
-
     public Schema()
     {
         blocks = new HashMap<>();

@@ -628,11 +628,11 @@ public class Main extends JavaPlugin implements Listener {
         Schema boulder = new Schema();
         boulder.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.STONE, (byte) 0, Biome.DEEP_OCEAN, false));
 
-        Schema OaktreeSchm = new Schema();              //Better to place apling to grow a tree after than build equal trees
+        Schema OaktreeSchm = new Schema();              //Better to place sapling to grow a tree after than build equal trees
         OaktreeSchm.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.SAPLING, (byte) 0, Biome.DEEP_OCEAN, false));
 
-        Schema pineTreeSchm = new Schema();              //Better to place apling to grow a tree after than build equal trees
-        OaktreeSchm.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.SAPLING, (byte) 1, Biome.DEEP_OCEAN, false));
+        Schema pineTreeSchm = new Schema();              //Better to place sapling to grow a tree after than build equal trees
+        pineTreeSchm.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.SAPLING, (byte) 1, Biome.DEEP_OCEAN, false));
 
         Schema darkOakTreeSchm = new Schema();
         darkOakTreeSchm.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.SAPLING, (byte) 5, Biome.DEEP_OCEAN, false));
@@ -690,8 +690,8 @@ public class Main extends JavaPlugin implements Listener {
         Schema logWall = new WallSchema(Material.LOG, (byte) 0, false);
         Schema logWallWindowed = new WallSchema(Material.LOG, (byte) 0, true);
 
-        Schema wood = new Schema();
-        wood.blocks.put(new Vector(0, 0, 0), new LandInfo(Material.WOOD, (byte) 1));
+        Schema woodTable = new Schema();
+        woodTable.blocks.put(new Vector(0, 1, 0), new LandInfo(193, (byte) 0));
 
         Schema chimneyPiece1 = new Schema();
         chimneyPiece1.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.COBBLESTONE));
@@ -705,13 +705,30 @@ public class Main extends JavaPlugin implements Listener {
 
         Schema stoneWallWindowed = new HighWindowedWall(Material.SMOOTH_BRICK);
 
+        Schema woodRoof = new RoofTileSchema(Material.WOOD, (byte)0);
+        Schema woodWall = new WallSchema(Material.WOOD, (byte)0, false);
+        Schema woodWallWindowed = new WallSchema(Material.WOOD, (byte)0, true);
+        Schema woodConcrete = new ConcreteSchema(Material.WOOD, (byte)0);
+
+        for (int i = 6; i <= 13; ++i) {
+            schemas.put(i, woodWall);
+        }
+
+        for (int i = 16; i <= 25; ++i) {
+            schemas.put(i, woodConcrete);
+        }
+
+        schemas.put(14, woodWallWindowed);
+        schemas.put(15, woodWallWindowed);
+
+
         schemas.put(149, logWall);
 
         //TODO: make fireplace face dependent
-        schemas.put(2266, fireplace);
-        schemas.put(2255, fireplace);
-        schemas.put(2260, fireplace);
-        schemas.put(2270, fireplace);
+        //schemas.put(2266, fireplace);
+        //schemas.put(2255, fireplace);
+        //schemas.put(2260, fireplace);
+        //schemas.put(2270, fireplace);
 
         schemas.put(2265, stoneArch);
         schemas.put(2262, stoneArch);
@@ -725,11 +742,11 @@ public class Main extends JavaPlugin implements Listener {
         schemas.put(2263, chimneyPiece1);
 
         for (int i = 2923; i <= 2960; ++i) {
-            schemas.put(i, wood);
+            schemas.put(i, woodTable);
         }
 
         for (int i = 1459; i <= 1488; ++i) {
-            schemas.put(i, wood);
+            schemas.put(i, woodRoof);
         }
 
         schemas.put(146, logWall);
@@ -1011,9 +1028,14 @@ public class Main extends JavaPlugin implements Listener {
                 schm = getSchemaById(id);
 
                 for (Vector mod : schm.blocks.keySet()) {
+                    bl = schm.blocks.get(mod);
                     block = world.getBlockAt(x + mod.getBlockX(), (int) (y * UOmod + heightOffset + mod.getBlockY()) /*- height*/, z + mod.getBlockZ());
-                    block.setType(schm.blocks.get(mod).mat);
-                    block.setData(schm.blocks.get(mod).subId);
+
+                    if(!bl.isModded())
+                        block.setType(bl.mat);
+                    else
+                        block.setTypeId(bl.getModId());
+                    block.setData(bl.subId);
                 }
             }
             str.close();
@@ -1098,7 +1120,10 @@ public class Main extends JavaPlugin implements Listener {
 
                     for (j = 1; j < (y * UOmod) + heightOffset; ++j) {
                         block = world.getBlockAt(x, j, z);
+                        if(!bl.isModded())
                         block.setType(bl.mat);
+                        else
+                        block.setTypeId(bl.getModId());
                         block.setData(bl.subId);
                         block.setBiome(bl.biome);
                     }
