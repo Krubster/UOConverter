@@ -13,6 +13,7 @@ public class LandInfo {
     boolean fill;
     private boolean modded = false;
     private int modId;
+    public boolean useModifier = true;
 
     public LandInfo(int modId )
     {
@@ -65,6 +66,16 @@ public class LandInfo {
         this.subId = s;
         this.biome = b;
         this.fill = f;
+    }
+
+
+    public LandInfo(Material m, byte s, Biome b, boolean f, boolean modifier)
+    {
+        this.mat = m;
+        this.subId = s;
+        this.biome = b;
+        this.fill = f;
+        this.useModifier = modifier;
     }
 
     public boolean isModded() {
