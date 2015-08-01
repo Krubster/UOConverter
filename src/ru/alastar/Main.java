@@ -28,7 +28,7 @@ public class Main extends JavaPlugin implements Listener {
     public static HashMap<Integer, Schema> schemas;
     public static Schema errorSchm;
     public static double UOmod = 4.5 / 20.0; //UO untis to minecraft blocks modifier
-	public static double MultisUOmod = 3.45 / 20.0; // multis modifier  you may use old 4.0 / 20.0 for higher buildings
+    public static double MultisUOmod = 3.45 / 20.0; // multis modifier  you may use old 4.0 / 20.0 for higher buildings
     public static int tilePerUpdate = 5000;
     public static long freq = 1;
     static LandWorker worker = new LandWorker();
@@ -702,84 +702,584 @@ public class Main extends JavaPlugin implements Listener {
         woodTable.blocks.put(new Vector(0, 1, 0), new LandInfo(193, (byte) 0));
 
         Schema chimneyPiece1 = new Schema();
+        chimneyPiece1.blocks.put(new Vector(0, 0, 0), new LandInfo(Material.COBBLESTONE));
         chimneyPiece1.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.COBBLESTONE));
         chimneyPiece1.blocks.put(new Vector(0, 2, 0), new LandInfo(Material.COBBLESTONE));
 
         Schema fireplace = new Schema();
-        chimneyPiece1.blocks.put(new Vector(0, 0, 0), new LandInfo(Material.COBBLESTONE));
-        chimneyPiece1.blocks.put(new Vector(1, 1, 0), new LandInfo(Material.COBBLESTONE));
-        chimneyPiece1.blocks.put(new Vector(0, 1, 1), new LandInfo(Material.COBBLESTONE));
-        chimneyPiece1.blocks.put(new Vector(1, 1, 1), new LandInfo(Material.COBBLESTONE));
+        fireplace.blocks.put(new Vector(0, 0, 0), new LandInfo(Material.COBBLESTONE));
+        fireplace.blocks.put(new Vector(1, 1, 0), new LandInfo(Material.COBBLESTONE));
+        fireplace.blocks.put(new Vector(0, 1, 1), new LandInfo(Material.COBBLESTONE));
+        fireplace.blocks.put(new Vector(1, 1, 1), new LandInfo(Material.COBBLESTONE));
 
         Schema stoneWallWindowed = new HighWindowedWall(Material.SMOOTH_BRICK);
 
-        Schema woodRoof = new RoofTileSchema(Material.WOOD, (byte)4);
-        Schema woodWall = new WallSchema(Material.WOOD, (byte)0, false);
-        Schema woodWallWindowed = new WallSchema(Material.WOOD, (byte)0, true);
-        Schema woodConcrete = new ConcreteSchema(Material.WOOD, (byte)0);
+        Schema woodRoof = new RoofTileSchema(Material.WOOD, (byte) 4);
+        Schema woodWall = new WallSchema(Material.WOOD, (byte) 0, false);
+        Schema woodWallWindowed = new WallSchema(Material.WOOD, (byte) 0, true);
+        Schema woodConcrete = new ConcreteSchema(Material.WOOD, (byte) 0);
 
-        Schema logConcrete = new ConcreteSchema(Material.LOG, (byte)0);
+        Schema logConcrete = new ConcreteSchema(Material.LOG, (byte) 0);
 
 
-        Schema stoneFancyWall = new WallSchema(Material.SMOOTH_BRICK, (byte)3, false);
-        Schema stoneFancyWallWindow = new WallSchema(Material.SMOOTH_BRICK, (byte)3, true);
+        Schema stoneFancyWall = new WallSchema(Material.SMOOTH_BRICK, (byte) 3, false);
+        Schema stoneFancyWallWindow = new WallSchema(Material.SMOOTH_BRICK, (byte) 3, true);
 
-        Schema  whiteWoodWall = new WallSchema(Material.WOOD, (byte)2, false);
-        Schema  whiteWoodWallWindowed = new WallSchema(Material.WOOD, (byte)2, true);
-        Schema  whiteWoodConcrete = new ConcreteSchema(Material.WOOD, (byte)2);
+        Schema whiteWoodWall = new WallSchema(Material.WOOD, (byte) 2, false);
+        Schema whiteWoodWallWindowed = new WallSchema(Material.WOOD, (byte) 2, true);
+        Schema whiteWoodConcrete = new ConcreteSchema(Material.WOOD, (byte) 2);
 
-        Schema  CobbleWall = new WallSchema(Material.COBBLESTONE, (byte)0, false);
-        Schema  CobbleWallWindowed = new WallSchema(Material.COBBLESTONE, (byte)0, true);
-        Schema  CobbleConcrete = new ConcreteSchema(Material.COBBLESTONE, (byte)0);
+        Schema CobbleWall = new WallSchema(Material.COBBLESTONE, (byte) 0, false);
+        Schema CobbleWallWindowed = new WallSchema(Material.COBBLESTONE, (byte) 0, true);
+        Schema CobbleConcrete = new ConcreteSchema(Material.COBBLESTONE, (byte) 0);
 
-        Schema leavesRoof = new RoofTileSchema(Material.LEAVES, (byte)0);
-        Schema hayRoof = new RoofTileSchema(Material.HAY_BLOCK, (byte)0);
-        Schema blueSlateRoof = new RoofTileSchema(Material.STAINED_CLAY, (byte)3);
-        Schema logRoof = new RoofTileSchema(Material.LOG, (byte)0);
-        Schema tentRoof = new RoofTileSchema(Material.WOOL, (byte)3);
+        Schema leavesRoof = new RoofTileSchema(Material.LEAVES, (byte) 0);
+        Schema hayRoof = new RoofTileSchema(Material.HAY_BLOCK, (byte) 0);
+        Schema blueSlateRoof = new RoofTileSchema(Material.STAINED_CLAY, (byte) 3);
+        Schema logRoof = new RoofTileSchema(Material.LOG, (byte) 0);
+        Schema tentRoof = new RoofTileSchema(Material.WOOL, (byte) 3);
 
-        for(int i = 1630; i <= 1652; ++i)
+        Schema brownRug = new Schema();
+        brownRug.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.CARPET, (byte) 12));
+
+        Schema redRug = new Schema();
+        redRug.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.CARPET, (byte) 14));
+
+        Schema blueRug = new Schema();
+        blueRug.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.CARPET, (byte) 11));
+
+        Schema yellowRug = new Schema();
+        yellowRug.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.CARPET, (byte) 4));
+
+        Schema magnetaRug = new Schema();
+        magnetaRug.blocks.put(new Vector(0, 1, 0), new LandInfo(Material.CARPET, (byte) 2));
+
+
+        Schema marbleWall = new WallSchema(Material.QUARTZ_BLOCK, (byte) 2, false);
+        Schema marbleWallWindowed = new WallSchema(Material.QUARTZ_BLOCK, (byte) 2, true);
+        Schema marbleConcrete = new ConcreteSchema(Material.QUARTZ_BLOCK, (byte) 2);
+
+        Schema marbleSolidWall = new WallSchema(Material.QUARTZ_BLOCK, (byte) 0, false);
+        Schema marbleSolidWallWindowed = new WallSchema(Material.QUARTZ_BLOCK, (byte) 0, true);
+        Schema marbleSolidConcrete = new ConcreteSchema(Material.QUARTZ_BLOCK, (byte) 0);
+
+        Schema stoneStairsEast = new StairsEast(Material.SMOOTH_STAIRS);
+        Schema stoneStairsN = new StairsNorth(Material.SMOOTH_STAIRS);
+        Schema stoneStairsS = new StairsSouth(Material.SMOOTH_STAIRS);
+        Schema stoneStairsW = new StairsWest(Material.SMOOTH_STAIRS);
+
+        Schema caveFloor = new FloorTileSchema(Material.STONE, (byte)0);
+
+        Schema woodSignPost = new Schema();
+        woodSignPost.blocks.put(new Vector(0,2,0), new LandInfo(Material.FENCE));
+
+        Schema caveWall = new WallSchema(Material.STONE, (byte)0, false);
+
+        Schema table = new Schema();
+        table.blocks.put(new Vector(0, 1, 0), new LandInfo(218));
+
+        Schema stalagmite = new Schema();
+        stalagmite.blocks.put(new Vector(0,1,0), new LandInfo(Material.STONE));
+
+        Schema pottedTree = new Schema();
+        pottedTree.blocks.put(new Vector(0,1,0), new LandInfo(Material.LOG));
+        pottedTree.blocks.put(new Vector(0,2,0), new LandInfo(Material.LEAVES));
+        pottedTree.blocks.put(new Vector(0,3,0), new LandInfo(Material.LEAVES));
+
+        Schema blood = new Schema();
+        blood.blocks.put(new Vector(0,1,0), new LandInfo(209)); // CustomNPC's block
+
+        Schema bookshelf = new Schema();
+        bookshelf.blocks.put(new Vector(0,1,0), new LandInfo(187, (byte)1));    //      <-  |
+        bookshelf.blocks.put(new Vector(0,2,0), new LandInfo(187, (byte)1));      //  <-    | = BiblioCraft shelves
+        bookshelf.blocks.put(new Vector(0,3,0), new LandInfo(187, (byte)1));        //   <- |
+
+        Schema post = new Schema();
+        post.blocks.put(new Vector(0,1,0), new LandInfo(Material.FENCE));
+        post.blocks.put(new Vector(0,2,0), new LandInfo(Material.FENCE));
+        post.blocks.put(new Vector(0,3,0), new LandInfo(Material.FENCE));
+
+        Schema woodBench = new Schema();
+        woodBench.blocks.put(new Vector(0,1,0), new LandInfo(219, (byte)5));
+
+        Schema carrot = new Schema();
+        carrot.blocks.put(new Vector(0,1,0), new LandInfo(Material.CARROT));
+
+        Schema potato = new Schema();
+        potato.blocks.put(new Vector(0,1,0), new LandInfo(Material.POTATO));
+
+        Schema serpentPillarPiece = new Schema();
+        serpentPillarPiece.blocks.put(new Vector(0,1,0), new LandInfo(Material.STAINED_CLAY, (byte)11));
+
+        Schema grayRug = new Schema();
+        grayRug.blocks.put(new Vector(0,1,0), new LandInfo(Material.CARPET, (byte)7));
+
+        Schema woodFloor = new FloorTileSchema(Material.WOOD, (byte)1);
+
+        Schema woodFence = new Schema();
+        woodFence.blocks.put(new Vector(0,1,0), new LandInfo(Material.FENCE));
+
+        Schema stoneFloor = new FloorTileSchema(43, (byte)0);
+        Schema sandStoneFloor = new FloorTileSchema(Material.SANDSTONE, (byte)0);
+        Schema netherBricksFloor = new FloorTileSchema(Material.NETHER_BRICK, (byte)0);
+        Schema lapisFloor = new FloorTileSchema(Material.LAPIS_BLOCK, (byte)0);
+        Schema noteFloor = new FloorTileSchema(25, (byte)0);
+        Schema smoothStoneFloor = new FloorTileSchema(Material.SMOOTH_BRICK, (byte)0);
+        Schema darkWoodFloor = new FloorTileSchema(Material.WOOD, (byte)1);
+        Schema cobbleFloor = new FloorTileSchema(Material.COBBLESTONE, (byte)0);
+        Schema quartzFloor = new FloorTileSchema(Material.QUARTZ_BLOCK, (byte)0);
+
+        Schema cobbleWall = new WallSchema(Material.COBBLESTONE, (byte) 0, false);
+        Schema cobbleWallWindowed = new WallSchema(Material.COBBLESTONE, (byte) 0, true);
+        Schema cobbleConcrete = new ConcreteSchema(Material.COBBLESTONE, (byte) 0);
+
+        Schema ironFence = new Schema();
+        ironFence.blocks.put(new Vector(0,1,0), new LandInfo(Material.IRON_FENCE));
+        ironFence.blocks.put(new Vector(0,2,0), new LandInfo(Material.IRON_FENCE));
+
+        for(int i = 2121; i <= 2123; ++i)
         {
+            schemas.put(i, ironFence);
+        }
+
+        for(int i = 2124; i <= 2139; ++i)
+        {
+            schemas.put(i, stoneArch);
+        }
+
+        for(int i = 78; i <= 86; ++i)
+        {
+            schemas.put(i, cobbleConcrete);
+        }
+
+
+        for(int i = 74; i <= 77; ++i)
+        {
+            schemas.put(i, cobbleWall);
+        }
+
+        for(int i = 69; i <= 73; ++i)
+        {
+            schemas.put(i, stoneArch);
+        }
+
+        for(int i = 61; i <= 68; ++i)
+        {
+            schemas.put(i, cobbleConcrete);
+        }
+
+        for(int i = 51; i <= 58; ++i)
+        {
+            schemas.put(i, cobbleWall);
+        }
+
+
+        for(int i = 59; i <= 60; ++i)
+        {
+            schemas.put(i, cobbleWallWindowed);
+        }
+
+        for(int i = 45; i <= 50; ++i)
+        {
+            schemas.put(i, cobbleConcrete);
+        }
+
+        for(int i = 40; i <= 44; ++i)
+        {
+            schemas.put(i, stoneArch);
+        }
+
+        for(int i = 36; i <= 49; ++i)
+        {
+            schemas.put(i, cobbleConcrete);
+        }
+
+        for(int i = 34; i <= 35; ++i)
+        {
+            schemas.put(i, cobbleWallWindowed);
+        }
+
+        for(int i = 26; i <= 33; ++i)
+        {
+            schemas.put(i, cobbleWall);
+        }
+
+        for(int i = 1335; i <= 1338; ++i)
+        {
+            schemas.put(i, netherBricksFloor);
+        }
+
+        for(int i = 1317; i <= 1334; ++i)
+        {
+            schemas.put(i, sandStoneFloor);
+        }
+
+        for(int i = 1306; i <= 1316; ++i)
+        {
+            schemas.put(i, stoneFloor);
+        }
+
+        for(int i = 1301; i <= 1304; ++i)
+        {
+            schemas.put(i, cobbleFloor);
+        }
+
+        for(int i = 1297; i <= 1300; ++i)
+        {
+            schemas.put(i, quartzFloor);
+        }
+
+        for(int i = 1293; i <= 1294; ++i)
+        {
+            schemas.put(i, quartzFloor);
+        }
+
+        for(int i = 1284; i <= 1292; ++i)
+        {
+            schemas.put(i, woodFloor);
+        }
+
+        for(int i = 1280; i <= 1283; ++i)
+        {
+            schemas.put(i, sandStoneFloor);
+        }
+
+        for(int i = 1276; i <= 1279; ++i)
+        {
+            schemas.put(i, smoothStoneFloor);
+        }
+
+        for(int i = 1267; i <= 1275; ++i)
+        {
+            schemas.put(i, noteFloor);
+        }
+
+        for(int i = 1258; i <= 1266; ++i)
+        {
+            schemas.put(i, lapisFloor);
+        }
+
+        for(int i = 1250; i <= 1257; ++i)
+        {
+            schemas.put(i, netherBricksFloor);
+        }
+
+        for(int i = 1217; i <= 1249; ++i)
+        {
+            schemas.put(i, woodFloor);
+        }
+
+        for(int i = 1189; i <= 1216; ++i)
+        {
+            schemas.put(i, darkWoodFloor);
+        }
+
+        for(int i = 1185; i <= 1188; ++i)
+        {
+            schemas.put(i, woodFloor);
+        }
+
+
+        for(int i = 3164; i <= 3177; ++i)
+        {
+            schemas.put(i, potato);
+        }
+
+        for(int i = 2140; i <= 2149; ++i)
+        {
+            schemas.put(i, woodFence);
+        }
+
+        for(int i = 1993; i <= 2000; ++i)
+        {
+            schemas.put(i, woodFloor);
+        }
+
+        for(int i = 4248; i <= 4259; ++i)
+        {
+            schemas.put(i, grayRug);
+        }
+
+
+        for(int i = 9020; i <= 9034; ++i)
+        {
+            schemas.put(i, serpentPillarPiece);
+        }
+
+        schemas.put(3195, potato);
+        schemas.put(3196, potato);
+
+
+        schemas.put(3190, carrot);
+        schemas.put(3191, carrot);
+        schemas.put(3192, carrot);
+
+        for(int i = 2860; i <= 2865; ++i)
+        {
+            schemas.put(i, woodBench);
+        }
+
+        for(int i = 2711; i <= 2718; ++i)
+        {
+            schemas.put(i, bookshelf);
+        }
+
+        for(int i = 4650; i <= 4655; ++i)
+        {
+            schemas.put(i, blood);
+        }
+
+
+        for(int i = 4552; i <= 4556; ++i)
+        {
+            schemas.put(i, pottedTree);
+        }
+
+        for(int i = 2272; i <= 2282; ++i)
+        {
+            schemas.put(i, stalagmite);
+        }
+
+        schemas.put(553, logWall);
+        schemas.put(4758, post);
+
+        for(int i = 8550; i <= 8553; ++i)
+        {
+            schemas.put(i, caveWall);
+        }
+
+        for(int i = 15160; i <= 15282; ++i)
+        {
+            schemas.put(i, stoneArch);
+        }
+
+        for(int i = 12720; i <= 12736; ++i)
+        {
+            schemas.put(i, stoneArch);
+        }
+
+        for(int i = 2876; i <= 2880; ++i)
+        {
+            schemas.put(i, table);
+        }
+
+        for(int i = 1361; i <= 1363; ++i)
+        {
+            schemas.put(i, caveFloor);
+        }
+
+        for(int i = 1339; i <= 1359; ++i)
+        {
+            schemas.put(i, caveFloor);
+        }
+
+        for(int i = 637; i <= 640; ++i)
+        {
+            schemas.put(i, caveWall);
+        }
+
+        for(int i = 604; i <= 630; ++i)
+        {
+            schemas.put(i, caveWall);
+        }
+
+
+        for(int i = 2967; i <= 2978; ++i)
+        {
+            schemas.put(i, woodSignPost);
+        }
+
+
+        schemas.put(1875, stoneStairsS);
+        schemas.put(1876, stoneStairsW);
+
+        schemas.put(1874, stoneStairsEast);
+        schemas.put(1873, stoneStairsN);
+
+        schemas.put(1872, stoneConcrete);
+
+
+        for (int i = 701; i <= 704; ++i) {
+            schemas.put(i, stoneArch);
+        }
+
+        for (int i = 697; i <= 700; ++i) {
+            schemas.put(i, marbleConcrete);
+        }
+
+        for (int i = 693; i <= 696; ++i) {
+            schemas.put(i, marbleSolidConcrete);
+        }
+
+        for (int i = 688; i <= 692; ++i) {
+            schemas.put(i, stoneArch);
+        }
+
+
+        for (int i = 686; i <= 685; ++i) {
+            schemas.put(i, marbleWallWindowed);
+        }
+
+        for (int i = 673; i <= 678; ++i) {
+            schemas.put(i, marbleSolidConcrete);
+        }
+
+        for (int i = 679; i <= 684; ++i) {
+            schemas.put(i, marbleWall);
+        }
+
+        for (int i = 669; i <= 672; ++i) {
+            schemas.put(i, marbleWall);
+        }
+
+        for (int i = 667; i <= 668; ++i) {
+            schemas.put(i, marbleWallWindowed);
+        }
+
+        for (int i = 663; i <= 666; ++i) {
+            schemas.put(i, marbleWall);
+        }
+
+        for (int i = 661; i <= 662; ++i) {
+            schemas.put(i, marbleSolidWallWindowed);
+        }
+
+        for (int i = 657; i <= 660; ++i) {
+            schemas.put(i, marbleSolidWall);
+        }
+
+        for (int i = 283; i <= 288; ++i) {
+            schemas.put(i, marbleWall);
+        }
+
+        for (int i = 293; i <= 294; ++i) {
+            schemas.put(i, marbleSolidConcrete);
+        }
+
+        for (int i = 289; i <= 292; ++i) {
+            schemas.put(i, stoneArch);
+        }
+
+        for (int i = 279; i <= 282; ++i) {
+            schemas.put(i, marbleSolidConcrete);
+        }
+
+        for (int i = 274; i <= 278; ++i) {
+            schemas.put(i, stoneArch);
+        }
+
+        for (int i = 270; i <= 273; ++i) {
+            schemas.put(i, marbleConcrete);
+        }
+
+        for (int i = 266; i <= 269; ++i) {
+            schemas.put(i, marbleSolidConcrete);
+        }
+
+        for (int i = 264; i <= 265; ++i) {
+            schemas.put(i, marbleSolidWallWindowed);
+        }
+
+        for (int i = 260; i <= 263; ++i) {
+            schemas.put(i, marbleSolidWall);
+        }
+
+        for (int i = 258; i <= 259; ++i) {
+            schemas.put(i, marbleSolidWallWindowed);
+        }
+
+        for (int i = 254; i <= 257; ++i) {
+            schemas.put(i, marbleSolidWall);
+        }
+
+        for (int i = 252; i <= 253; ++i) {
+            schemas.put(i, marbleWallWindowed);
+        }
+
+
+        for (int i = 248; i <= 251; ++i) {
+            schemas.put(i, marbleWall);
+        }
+
+
+        for (int i = 2754; i <= 2757; ++i) {
+            schemas.put(i, stoneArch);
+        }
+
+        for (int i = 2761; i <= 2768; ++i) {
+            schemas.put(i, stoneArch);
+        }
+
+        for (int i = 2770; i <= 2777; ++i) {
+            schemas.put(i, stoneArch);
+        }
+
+        for (int i = 2779; i <= 2794; ++i) {
+            schemas.put(i, stoneArch);
+        }
+
+        for (int i = 2798; i <= 2809; ++i) {
+            schemas.put(i, stoneArch);
+        }
+
+
+        for (int i = 2795; i <= 2797; ++i) {
+            schemas.put(i, redRug);
+        }
+        schemas.put(2810, magnetaRug);
+
+        schemas.put(2769, yellowRug);
+        schemas.put(2778, yellowRug);
+
+        for (int i = 2758; i <= 2760; ++i) {
+            schemas.put(i, redRug);
+        }
+
+        for (int i = 2758; i <= 2760; ++i) {
+            schemas.put(i, redRug);
+        }
+
+        for (int i = 2749; i <= 2753; ++i) {
+            schemas.put(i, blueRug);
+        }
+
+        for (int i = 2729; i <= 2748; ++i) {
+            schemas.put(i, brownRug);
+        }
+
+        for (int i = 1630; i <= 1652; ++i) {
             schemas.put(i, tentRoof);
         }
 
-        for(int i = 1587; i <= 1590; ++i)
-        {
+        for (int i = 1587; i <= 1590; ++i) {
             schemas.put(i, tentRoof);
         }
 
-        for(int i = 1608; i <= 1617; ++i)
-        {
+        for (int i = 1608; i <= 1617; ++i) {
             schemas.put(i, tentRoof);
         }
 
-        for(int i = 1535; i <= 1578; ++i)
-        {
+        for (int i = 1535; i <= 1578; ++i) {
             schemas.put(i, tentRoof);
         }
 
-        for(int i = 1520; i <= 1543; ++i)
-        {
+        for (int i = 1520; i <= 1543; ++i) {
             schemas.put(i, logRoof);
         }
 
-        for(int i = 1489; i <= 1516; ++i)
-        {
+        for (int i = 1489; i <= 1516; ++i) {
             schemas.put(i, leavesRoof);
         }
 
-        for(int i = 1429; i <= 1443; ++i)
-        {
+        for (int i = 1429; i <= 1443; ++i) {
             schemas.put(i, blueSlateRoof);
         }
 
-        for(int i = 1444; i <= 1458; ++i)
-        {
+        for (int i = 1444; i <= 1458; ++i) {
             schemas.put(i, hayRoof);
         }
 
-        for(int i = 1414; i <= 1428; ++i)
-        {
+        for (int i = 1414; i <= 1428; ++i) {
             schemas.put(i, leavesRoof);
         }
 
@@ -795,18 +1295,15 @@ public class Main extends JavaPlugin implements Listener {
         schemas.put(246, CobbleWall);
 
 
-        for(int i = 220; i <= 223; ++i)
-        {
+        for (int i = 220; i <= 223; ++i) {
             schemas.put(i, CobbleConcrete);
         }
 
-        for(int i = 224; i <= 229; ++i)
-        {
+        for (int i = 224; i <= 229; ++i) {
             schemas.put(i, stoneArch);
         }
 
-        for(int i = 205; i <= 218; ++i)
-        {
+        for (int i = 205; i <= 218; ++i) {
             schemas.put(i, stoneArch);
         }
 
@@ -815,20 +1312,17 @@ public class Main extends JavaPlugin implements Listener {
         schemas.put(204, CobbleWall);
 
 
-        for(int i = 199; i <= 201; ++i)
-        {
+        for (int i = 199; i <= 201; ++i) {
             schemas.put(i, CobbleWall);
         }
 
         schemas.put(197, CobbleWall);
 
-        for(int i = 189; i <= 194; ++i)
-        {
+        for (int i = 189; i <= 194; ++i) {
             schemas.put(i, whiteWoodConcrete);
         }
 
-        for(int i = 185; i <= 188; ++i)
-        {
+        for (int i = 185; i <= 188; ++i) {
             schemas.put(i, whiteWoodWallWindowed);
         }
 
@@ -837,8 +1331,7 @@ public class Main extends JavaPlugin implements Listener {
         schemas.put(184, whiteWoodConcrete);
 
 
-        for(int i = 166; i <= 181; ++i)
-        {
+        for (int i = 166; i <= 181; ++i) {
             schemas.put(i, whiteWoodWall);
         }
 
@@ -850,8 +1343,7 @@ public class Main extends JavaPlugin implements Listener {
         schemas.put(142, stoneFancyWall);
 
 
-        for(int i = 134; i <= 139; ++i)
-        {
+        for (int i = 134; i <= 139; ++i) {
             schemas.put(i, stoneArch);
         }
 
@@ -860,13 +1352,11 @@ public class Main extends JavaPlugin implements Listener {
         schemas.put(131, stoneWallWindowed);
         schemas.put(133, stoneWallWindowed);
 
-        for(int i = 128; i <= 130; ++i)
-        {
+        for (int i = 128; i <= 130; ++i) {
             schemas.put(i, stoneWall);
         }
 
-        for(int i = 122; i <= 127; ++i)
-        {
+        for (int i = 122; i <= 127; ++i) {
             schemas.put(i, stoneArch);
         }
 
@@ -894,15 +1384,19 @@ public class Main extends JavaPlugin implements Listener {
 
 
         //TODO: make fireplace face dependent
-        //schemas.put(2266, fireplace);
-        //schemas.put(2255, fireplace);
-        //schemas.put(2260, fireplace);
-        //schemas.put(2270, fireplace);
+        schemas.put(2266, fireplace);
+        schemas.put(2255, fireplace);
+        schemas.put(2260, fireplace);
+        schemas.put(2270, fireplace);
 
         schemas.put(2265, stoneArch);
         schemas.put(2262, stoneArch);
         schemas.put(2268, stoneArch);
         schemas.put(2257, stoneArch);
+        schemas.put(2262, stoneArch);
+        schemas.put(2265, stoneArch);
+        schemas.put(2267, stoneArch);
+        schemas.put(2268, stoneArch);
 
         schemas.put(2258, chimneyPiece1);
         schemas.put(2269, chimneyPiece1);
@@ -957,10 +1451,13 @@ public class Main extends JavaPlugin implements Listener {
         schemas.put(2664, bedSchemaSouthNorth);
         schemas.put(2652, bedSchemaSouthNorth);
         schemas.put(2650, bedSchemaSouthNorth);
+        schemas.put(2659, bedSchemaSouthNorth);
 
         schemas.put(2651, stoneArch);
         schemas.put(2654, stoneArch);
         schemas.put(2660, stoneArch);
+        schemas.put(2658, stoneArch);
+
         schemas.put(2652, stoneArch);
         schemas.put(2653, stoneArch);
         schemas.put(2665, stoneArch);
@@ -1118,13 +1615,11 @@ public class Main extends JavaPlugin implements Listener {
                     World world = ((Player) sender).getWorld();
                     String name = args[1];
                     File f = new File(System.getProperty("user.dir") + "\\conv\\" + name + ".bin");
-                    if(worker.str == null && !worker.processing) {
+                    if (worker.str == null && !worker.processing) {
                         worker.set(world, f);
                         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, worker, 0, freq);
                         sender.sendMessage("Land worker was started!");
-                    }
-                    else
-                    {
+                    } else {
                         sender.sendMessage("Land worker is busy!");
                     }
                     return true;
@@ -1132,13 +1627,11 @@ public class Main extends JavaPlugin implements Listener {
                     World world = ((Player) sender).getWorld();
                     String name = args[1];
                     File f = new File(System.getProperty("user.dir") + "\\conv\\" + name + ".bin");
-                    if(mworker.str == null && !mworker.processing) {
+                    if (mworker.str == null && !mworker.processing) {
                         mworker.set(world, f);
                         this.getServer().getScheduler().scheduleSyncRepeatingTask(this, mworker, 0, freq);
                         sender.sendMessage("Multis worker was started!");
-                    }
-                    else
-                    {
+                    } else {
                         sender.sendMessage("Multis worker is busy!");
                     }
                     return true;
@@ -1185,7 +1678,7 @@ public class Main extends JavaPlugin implements Listener {
                     bl = schm.blocks.get(mod);
                     block = world.getBlockAt(x + mod.getBlockX(), (int) (y * UOmod + heightOffset + mod.getBlockY()) /*- height*/, z + mod.getBlockZ());
 
-                    if(!bl.isModded())
+                    if (!bl.isModded())
                         block.setType(bl.mat);
                     else
                         block.setTypeId(bl.getModId());
@@ -1208,6 +1701,7 @@ public class Main extends JavaPlugin implements Listener {
         log.info("Unknown Multi ID: " + id);
         return errorSchm;
     }
+
     //id is ultima land tile id
     public static LandInfo getBlockEqualById(final int id) {
         if (blocks.containsKey(id)) {

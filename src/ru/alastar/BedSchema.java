@@ -11,8 +11,8 @@ public class BedSchema extends Schema {
     {
         if(facing == 0)     //south/north
         {
-            blocks.put(new Vector(0, 1, 0), new LandInfo(Material.BED_BLOCK, (byte)0));
-            blocks.put(new Vector(0, 1, 1), new LandInfo(Material.BED_BLOCK, (byte)8));
+            blocks.put(new Vector(0, 1, 1), new LandInfo(Material.BED_BLOCK, (byte)0));
+            blocks.put(new Vector(0, 1, 0), new LandInfo(Material.BED_BLOCK, (byte)10));
 
         }
         else             //east/west

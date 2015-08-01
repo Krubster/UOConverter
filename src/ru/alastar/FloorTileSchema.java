@@ -11,4 +11,8 @@ public class FloorTileSchema extends Schema {
     {
         blocks.put(new Vector(0,0,0), new LandInfo(mat, sub));
     }
+    public FloorTileSchema(int id, byte sub)
+    {
+        blocks.put(new Vector(0,0,0), new LandInfo(id, sub));
+    }
 }
