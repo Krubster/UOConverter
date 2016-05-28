@@ -1,24 +1,23 @@
 package ru.alastar;
 
-import com.sk89q.worldedit.Vector;
 import org.bukkit.Material;
+
+import java.io.Serializable;
 
 /**
  * Created by Alastar on 30.07.2015.
  */
-public class BedSchema extends Schema {
-    public BedSchema(int facing)
-    {
-        if(facing == 0)     //south/north
+public class BedSchema extends Schema implements Serializable {
+    public BedSchema(int facing) {
+        if (facing == 0)     //south/north
         {
-            blocks.put(new Vector(0, 1, 1), new LandInfo(Material.BED_BLOCK, (byte)0));
-            blocks.put(new Vector(0, 1, 0), new LandInfo(Material.BED_BLOCK, (byte)10));
+            blocks.put(new UOVector(0, 1, 1), new LandInfo(Material.BED_BLOCK.getId(), (byte) 0));
+            blocks.put(new UOVector(0, 1, 0), new LandInfo(Material.BED_BLOCK.getId(), (byte) 10));
 
-        }
-        else             //east/west
+        } else             //east/west
         {
-            blocks.put(new Vector(1, 1, 0), new LandInfo(Material.BED_BLOCK, (byte)3));
-            blocks.put(new Vector(0, 1, 0), new LandInfo(Material.BED_BLOCK, (byte)11));
+            blocks.put(new UOVector(1, 1, 0), new LandInfo(Material.BED_BLOCK.getId(), (byte) 3));
+            blocks.put(new UOVector(0, 1, 0), new LandInfo(Material.BED_BLOCK.getId(), (byte) 11));
 
         }
     }

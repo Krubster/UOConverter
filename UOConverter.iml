@@ -8,6 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="WorldEdit" level="project" />
-    <orderEntry type="library" name="craftbukkit-1.8.7-R0.1-SNAPSHOT-latest" level="project" />
+    <orderEntry type="library" name="craftbukkit" level="project" />
   </component>
 </module>
