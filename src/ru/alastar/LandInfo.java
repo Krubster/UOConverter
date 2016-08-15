@@ -87,11 +87,7 @@ public class LandInfo implements Serializable, UOSerial {
     @Override
     public void serialize(BufferedOutputStream str) {
         try {
-<<<<<<< HEAD
             //UOConverter.log.info("MATERIAL: " + matId);
-=======
-            //Main.log.info("MATERIAL: " + matId);
->>>>>>> origin/master
             str.write(ByteBuffer.allocate(4).putInt(matId).array());
             str.write(ByteBuffer.allocate(1).put(subId).array());
             str.write(ByteBuffer.allocate(4).putInt(biomeid).array());
@@ -118,11 +114,7 @@ public class LandInfo implements Serializable, UOSerial {
         try {
             str.read(bytes);
             matId = ByteBuffer.wrap(bytes).getInt();
-<<<<<<< HEAD
             // UOConverter.log.info("MATERIAL: " + matId);
-=======
-            // Main.log.info("MATERIAL: " + matId);
->>>>>>> origin/master
             str.read(one);
             subId = ByteBuffer.wrap(one).get();
             str.read(bytes);

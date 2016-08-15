@@ -25,11 +25,7 @@ public class BinaryManager {
                 String n;
                 for (File f : db_file.listFiles()) {
                     n = f.getName();
-<<<<<<< HEAD
                     //UOConverter.log.info("Loading Schema " + n + "...");
-=======
-                    //Main.log.info("Loading Schema " + n + "...");
->>>>>>> origin/master
                     id = Integer.parseInt(n.substring(0, n.lastIndexOf(".")));
                     fis = new FileInputStream(f);
                     bis = new BufferedInputStream(fis);
@@ -39,11 +35,7 @@ public class BinaryManager {
                     toRet.put(id, schem);
                     bis.close();
                     fis.close();
-<<<<<<< HEAD
                     //UOConverter.log.info("Done! Size:" + f.getUsableSpace());
-=======
-                    //Main.log.info("Done! Size:" + f.getUsableSpace());
->>>>>>> origin/master
 
                 }
                 return toRet;
@@ -106,11 +98,7 @@ public class BinaryManager {
                 String n = " ";
                 for (File f : db_file.listFiles()) {
                     n = f.getName();
-<<<<<<< HEAD
                     //    UOConverter.log.info("Loading LandInfo " + n + "...");
-=======
-                    //    Main.log.info("Loading LandInfo " + n + "...");
->>>>>>> origin/master
                     id = Integer.parseInt(n.substring(0, n.lastIndexOf(".")));
                     fis = new FileInputStream(f);
                     bis = new BufferedInputStream(fis);
@@ -119,11 +107,7 @@ public class BinaryManager {
                     toRet.put(id, schem);
                     bis.close();
                     fis.close();
-<<<<<<< HEAD
                     //    UOConverter.log.info("Done! Size:" + f.getUsableSpace());
-=======
-                    //    Main.log.info("Done! Size:" + f.getUsableSpace());
->>>>>>> origin/master
 
                 }
                 return toRet;
@@ -143,11 +127,7 @@ public class BinaryManager {
         try {
             // SLAPI.save(housings, path);
             File tempF = new File(System.getProperty("user.dir") + "/" + path);
-<<<<<<< HEAD
             // UOConverter.log.info(tempF.getPath());
-=======
-            // Main.log.info(tempF.getPath());
->>>>>>> origin/master
             if (!tempF.exists())
                 try {
                     Files.createDirectory(tempF.toPath());

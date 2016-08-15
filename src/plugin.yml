@@ -1,15 +1,8 @@
 name: UOConverter
-<<<<<<< HEAD
 main: ru.alastar.UOConverter
 author: Alastar
 description: UOmap to minecraft
 version: 5.0
-=======
-main: ru.alastar.Main
-author: Alastar
-description: UOmap to minecraft
-version: 3.0
->>>>>>> origin/master
 depend: [WorldEdit]
 load: POSTWORLD
 commands:

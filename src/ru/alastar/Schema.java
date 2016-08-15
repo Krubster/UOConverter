@@ -55,11 +55,7 @@ public class Schema implements Serializable, UOSerial {
                 info = new LandInfo();
                 info.deserialize(str);
                 blocks.put(new UOVector(x, y, z), info);
-<<<<<<< HEAD
                 // UOConverter.log.info(Material.getMaterial(info.matId).toString());
-=======
-                // Main.log.info(Material.getMaterial(info.matId).toString());
->>>>>>> origin/master
 
             }
         } catch (IOException e) {
