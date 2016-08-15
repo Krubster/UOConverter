@@ -42,7 +42,11 @@ public class MultisWorker implements Runnable {
                 if (str == null)
                     str = new FileInputStream(f);
 
+<<<<<<< HEAD
                 while (str.available() > 0 && processed < UOConverter.tilePerUpdate) {
+=======
+                while (str.available() > 0 && processed < Main.tilePerUpdate) {
+>>>>>>> origin/master
 
                     str.read(bytes);
                     x = ByteBuffer.wrap(bytes).getInt();
@@ -59,12 +63,20 @@ public class MultisWorker implements Runnable {
                     str.read(bytes);
                     height = ByteBuffer.wrap(bytes).getInt();
 
+<<<<<<< HEAD
                     schm = UOConverter.getSchemaById(id);
+=======
+                    schm = Main.getSchemaById(id);
+>>>>>>> origin/master
                     if (schm != null) {
                         if (schm.blocks != null) {
                             for (UOVector mod : schm.blocks.keySet()) {
                                 bl = schm.blocks.get(mod);
+<<<<<<< HEAD
                                 block = world.getBlockAt(x + mod.getBlockX(), (int) (Math.ceil(y * UOConverter.MultisUOmod) + UOConverter.heightOffset + mod.getBlockY()) /*- height*/, z + mod.getBlockZ());
+=======
+                                block = world.getBlockAt(x + mod.getBlockX(), (int) (Math.ceil(y * Main.MultisUOmod) + Main.heightOffset + mod.getBlockY()) /*- height*/, z + mod.getBlockZ());
+>>>>>>> origin/master
 
                                 if (Material.getMaterial(bl.matId) != null)
                                     block.setType(Material.getMaterial(bl.matId));
@@ -81,22 +93,38 @@ public class MultisWorker implements Runnable {
                     str.close();
                     str = null;
                     processing = false;
+<<<<<<< HEAD
                     UOConverter.log.info("[MWorker]Finished!(" + f.getName() + ")");
                     if (nextInc) {
                         UOConverter.log.info("[MWorker]Running next file...");
+=======
+                    Main.log.info("[MWorker]Finished!(" + f.getName() + ")");
+                    if (nextInc) {
+                        Main.log.info("[MWorker]Running next file...");
+>>>>>>> origin/master
 
                         ++count;
                         File file = new File(fileName + count + ".bin");
                         if (file.exists()) {
+<<<<<<< HEAD
                             UOConverter.instance.launchMWorker(null, world, file, 200);
                         } else {
                             UOConverter.log.info("[MWorker]There's no files left, halting!");
+=======
+                            Main.instance.launchMWorker(null, world, file, 200);
+                        } else {
+                            Main.log.info("[MWorker]There's no files left, halting!");
+>>>>>>> origin/master
                             nextInc = false;
                             count = 1;
                         }
                     }
                 } else {
+<<<<<<< HEAD
                     UOConverter.log.info("[MWorker]" + (1.f - ((float) str.available() / (float) fileSize)) * 100 + "%");
+=======
+                    Main.log.info("[MWorker]" + (1.f - ((float) str.available() / (float) fileSize)) * 100 + "%");
+>>>>>>> origin/master
 
                 }
             } catch (Exception e) {
@@ -117,7 +145,11 @@ public class MultisWorker implements Runnable {
             this.world = w;
             this.f = f;
             this.processing = true;
+<<<<<<< HEAD
             UOConverter.log.info("[MWorker]Begin!(" + f.getName() + ")");
+=======
+            Main.log.info("[MWorker]Begin!(" + f.getName() + ")");
+>>>>>>> origin/master
             try {
                 if (str == null)
                     str = new FileInputStream(f);

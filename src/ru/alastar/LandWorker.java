@@ -1,5 +1,14 @@
 package ru.alastar;
 
+<<<<<<< HEAD
+=======
+import com.sk89q.worldedit.*;
+import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
+import com.sk89q.worldedit.bukkit.selections.Selection;
+import com.sk89q.worldedit.filtering.GaussianKernel;
+import com.sk89q.worldedit.filtering.HeightMapFilter;
+import com.sk89q.worldedit.regions.CuboidRegion;
+>>>>>>> origin/master
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -31,6 +40,12 @@ public class LandWorker implements Runnable {
     double mod = 0;
     LandInfo bl;
     Block block;
+<<<<<<< HEAD
+=======
+
+    public LandWorker() {
+    }
+>>>>>>> origin/master
 
     public LandWorker() {
     }
@@ -42,7 +57,11 @@ public class LandWorker implements Runnable {
                 if (str == null)
                     str = new FileInputStream(f);
 
+<<<<<<< HEAD
                 while (str.available() > 0 && processed < UOConverter.tilePerUpdate) {
+=======
+                while (str.available() > 0 && processed < Main.tilePerUpdate) {
+>>>>>>> origin/master
 
                     str.read(bytes);
                     x = ByteBuffer.wrap(bytes).getInt();
@@ -56,13 +75,20 @@ public class LandWorker implements Runnable {
                     str.read(bytes);
                     id = ByteBuffer.wrap(bytes).getInt();
 
+<<<<<<< HEAD
                     bl = UOConverter.getBlockEqualById(id);
                     if (bl.useModifier)
                         mod = UOConverter.UOmod;
+=======
+                    bl = Main.getBlockEqualById(id);
+                    if (bl.useModifier)
+                        mod = Main.MultisUOmod;
+>>>>>>> origin/master
                     else
                         mod = 1;
 
                     blockPrePlace(bl, x, y, z, id);
+<<<<<<< HEAD
 
                     if (bl.fill) {
                         if(!UOConverter.clearAbove) {
@@ -89,6 +115,32 @@ public class LandWorker implements Runnable {
                     } else {
 
                         for (j = 0; j < (int) Math.ceil(y * mod) + UOConverter.heightOffset; ++j) {
+=======
+
+                    if (bl.fill) {
+                        block = world.getBlockAt(x, (int) Math.ceil(y * mod) + Main.heightOffset, z);
+                        if (Material.getMaterial(bl.matId) != null)
+                            block.setType(Material.getMaterial(bl.matId));
+                        else
+                            block.setTypeId(bl.matId);
+                        block.setData(bl.subId);
+                        block.setBiome(Biome.values()[bl.biomeid]);
+
+                        for (j = (int) Math.ceil((y * mod) + Main.heightOffset - 1); j >= (int) Math.ceil(y * mod) + Main.heightOffset - 3; --j) {
+                            block = world.getBlockAt(x, j, z);
+                            block.setType(Material.getMaterial(Main.stoneInfo.matId));
+                            block.setData(Main.stoneInfo.subId);
+                        }
+
+                        for (j = (int) Math.ceil(y * mod) + Main.heightOffset - 4; j >= 0; --j) {
+                            block = world.getBlockAt(x, j, z);
+                            block.setType(Material.getMaterial(Main.dirtInfo.matId));
+                            block.setData(Main.dirtInfo.subId);
+                        }
+                    } else {
+
+                        for (j = 0; j < (int) Math.ceil(y * mod) + Main.heightOffset; ++j) {
+>>>>>>> origin/master
                             block = world.getBlockAt(x, j, z);
                             if (Material.getMaterial(bl.matId) != null)
                                 block.setType(Material.getMaterial(bl.matId));
@@ -96,12 +148,15 @@ public class LandWorker implements Runnable {
                                 block.setTypeId(bl.matId);
                             block.setData(bl.subId);
                             block.setBiome(Biome.values()[bl.biomeid]);
+<<<<<<< HEAD
                         }
                     }
                     if(UOConverter.clearAbove){
                         for (j = (int) Math.ceil(y * mod) + UOConverter.heightOffset + 1; j < world.getMaxHeight(); ++j) {
                             block = world.getBlockAt(x, j, z);
                             block.setType(Material.AIR);
+=======
+>>>>>>> origin/master
                         }
                     }
                     ++processed;
@@ -111,24 +166,42 @@ public class LandWorker implements Runnable {
                     str = null;
                     processing = false;
 
+<<<<<<< HEAD
                     UOConverter.log.info("[LWorker]Finished!(" + f.getName() + ")");
 
                     if (nextInc) {
                         UOConverter.log.info("[LWorker]Running next file...");
+=======
+                    Main.log.info("[LWorker]Finished!(" + f.getName() + ")");
+
+                    if (nextInc) {
+                        Main.log.info("[LWorker]Running next file...");
+>>>>>>> origin/master
 
                         ++count;
                         File file = new File(fileName + count + ".bin");
                         if (file.exists()) {
+<<<<<<< HEAD
                             UOConverter.log.info("[LWorker]Launching new worker for " + count + " file");
                             UOConverter.instance.launchLWorker(null, world, file, 240);
                         } else {
                             UOConverter.log.info("[LWorker]There's no files left, halting!");
+=======
+                            Main.log.info("[LWorker]Launching new worker for " + count + " file");
+                            Main.instance.launchLWorker(null, world, file, 240);
+                        } else {
+                            Main.log.info("[LWorker]There's no files left, halting!");
+>>>>>>> origin/master
                             nextInc = false;
                             count = 1;
                         }
                     }
                 } else {
+<<<<<<< HEAD
                     UOConverter.log.info("[LWorker]" + (1.f - ((float) str.available() / (float) fileSize)) * 100 + "%");
+=======
+                    Main.log.info("[LWorker]" + (1.f - ((float) str.available() / (float) fileSize)) * 100 + "%");
+>>>>>>> origin/master
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -140,6 +213,7 @@ public class LandWorker implements Runnable {
     private void blockPrePlace(LandInfo bl, float x, float y, float z, int id) {
         if (f.getName().contains("Felucca"))//we are scanning felucca
         {
+<<<<<<< HEAD
             //  UOConverter.log.info("We are scanning felucca!");
             if (bl.biomeid == Biome.EXTREME_HILLS.ordinal()) {
                 mod = UOConverter.UOHillsMod;
@@ -152,6 +226,14 @@ public class LandWorker implements Runnable {
         {
             if (bl.biomeid == Biome.EXTREME_HILLS.ordinal()) {
                 mod = UOConverter.UOHillsMod;
+=======
+            //  Main.log.info("We are scanning felucca!");
+            if (bl.biomeid == Biome.EXTREME_HILLS.ordinal()) {
+                mod = Main.UOHillsMod;
+            }
+            if (x >= 5120) {
+                mod = Main.UOmod;
+>>>>>>> origin/master
             }
         }
     }
@@ -167,7 +249,11 @@ public class LandWorker implements Runnable {
             this.world = w;
             this.f = f;
             this.processing = true;
+<<<<<<< HEAD
             UOConverter.log.info("[LWorker]Begin!(" + f.getName() + ")");
+=======
+            Main.log.info("[LWorker]Begin!(" + f.getName() + ")");
+>>>>>>> origin/master
             try {
                 if (str == null)
                     str = new FileInputStream(f);
