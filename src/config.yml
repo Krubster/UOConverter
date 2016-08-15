@@ -1,0 +1,8 @@
+clearAbove: false
+tilesPerUpdate: 1000
+freq: 40
+heightOffset: 25
+UOmod: 0.225
+UOMultisMod: 0.1775
+UOHillsMod: 1
+UODungeonMod: 0.25

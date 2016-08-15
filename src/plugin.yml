@@ -1,0 +1,24 @@
+name: UOConverter
+main: ru.alastar.UOConverter
+author: Alastar
+description: UOmap to minecraft
+version: 5.0
+depend: [WorldEdit]
+load: POSTWORLD
+commands:
+     convertuo:
+       description: creates copy of uo map in current world
+       permission: UOC.convert
+       usage: /convertuo <multis/land> <all/force> <filename> <begin index>
+     uofind:
+       description: looks for unknown clilocs in files
+       permission: UOC.find
+       usage: /uofind <multis/land> <filename> <begin index>
+     uotool:
+       description: binds right arm as a tool, that shows and cliloc id of a clicked block
+       permission: UOC.tool
+       usage: /uotool
+     uosmooth:
+       description: smoothes dungeons area(use only in Felluca map)
+       permission: UOC.smooth
+       usage: /uosmooth

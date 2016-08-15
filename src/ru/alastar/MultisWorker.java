@@ -1,11 +1,13 @@
 package ru.alastar;
 
-import com.sk89q.worldedit.Vector;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 /**
@@ -13,15 +15,25 @@ import java.nio.ByteBuffer;
  */
 public class MultisWorker implements Runnable {
 
-    public MultisWorker() {
-    }
-
-    boolean processing;
+    boolean processing = false;
     int processed = 0;
+    boolean nextInc = false;
+    String fileName;
+    int count = 1;
     FileInputStream str;
     World world;
     File f;
     int j;
+    int fileSize = 0;
+    UOVector vec = new UOVector(0, 0, 0);
+    int x, y, z, height, id;
+    byte[] bytes = new byte[4];
+    double mod = 0;
+    LandInfo bl;
+    Block block;
+    Schema schm;
+    public MultisWorker() {
+    }
 
     @Override
     public void run() {
@@ -30,16 +42,7 @@ public class MultisWorker implements Runnable {
                 if (str == null)
                     str = new FileInputStream(f);
 
-                int x = 0;
-                int y = 0;//y in minecraft coords
-                int z = 0;//z in minecraft coords
-                int id = 0;
-                int height = 0;     //needed to get true multi's position - don't really needed, we already have true Z
-                LandInfo bl;
-                byte[] bytes = new byte[4];
-                Block block;
-                Schema schm;
-                while (str.available() > 0 && processed < Main.tilePerUpdate) {
+                while (str.available() > 0 && processed < UOConverter.tilePerUpdate) {
 
                     str.read(bytes);
                     x = ByteBuffer.wrap(bytes).getInt();
@@ -56,27 +59,45 @@ public class MultisWorker implements Runnable {
                     str.read(bytes);
                     height = ByteBuffer.wrap(bytes).getInt();
 
-                    //log.info("Multi Tile: (" + x + ", " + y + ", " + z + ") ID - " + id + " Height: " + height);
+                    schm = UOConverter.getSchemaById(id);
+                    if (schm != null) {
+                        if (schm.blocks != null) {
+                            for (UOVector mod : schm.blocks.keySet()) {
+                                bl = schm.blocks.get(mod);
+                                block = world.getBlockAt(x + mod.getBlockX(), (int) (Math.ceil(y * UOConverter.MultisUOmod) + UOConverter.heightOffset + mod.getBlockY()) /*- height*/, z + mod.getBlockZ());
 
-                    schm = Main.getSchemaById(id);
-
-                    for (Vector mod : schm.blocks.keySet()) {
-                        bl = schm.blocks.get(mod);
-                        block = world.getBlockAt(x + mod.getBlockX(), (int) (y * Main.MultisUOmod + Main.heightOffset + mod.getBlockY()) /*- height*/, z + mod.getBlockZ());
-
-                        if(!bl.isModded())
-                            block.setType(bl.mat);
-                        else
-                            block.setTypeId(bl.getModId());
-                        block.setData(bl.subId);
+                                if (Material.getMaterial(bl.matId) != null)
+                                    block.setType(Material.getMaterial(bl.matId));
+                                else
+                                    block.setTypeId(bl.matId);
+                                block.setData(bl.subId);
+                            }
+                        }
+                        ++processed;
                     }
-                    ++processed;
                 }
+
                 if (!(str.available() > 0)) {
                     str.close();
                     str = null;
                     processing = false;
-                    Main.log.info("Finished!");
+                    UOConverter.log.info("[MWorker]Finished!(" + f.getName() + ")");
+                    if (nextInc) {
+                        UOConverter.log.info("[MWorker]Running next file...");
+
+                        ++count;
+                        File file = new File(fileName + count + ".bin");
+                        if (file.exists()) {
+                            UOConverter.instance.launchMWorker(null, world, file, 200);
+                        } else {
+                            UOConverter.log.info("[MWorker]There's no files left, halting!");
+                            nextInc = false;
+                            count = 1;
+                        }
+                    }
+                } else {
+                    UOConverter.log.info("[MWorker]" + (1.f - ((float) str.available() / (float) fileSize)) * 100 + "%");
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -85,11 +106,30 @@ public class MultisWorker implements Runnable {
         }
     }
 
+    public void setNextInc(String file, int i) {
+        fileName = System.getProperty("user.dir") + "\\conv\\" + file;
+        nextInc = true;
+        count = i;
+    }
+
     public void set(World w, File f) {
         if (!processing) {
             this.world = w;
             this.f = f;
             this.processing = true;
+            UOConverter.log.info("[MWorker]Begin!(" + f.getName() + ")");
+            try {
+                if (str == null)
+                    str = new FileInputStream(f);
+                fileSize = str.available();
+                str.close();
+                str = null;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }

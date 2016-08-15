@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="WorldEdit">
+  <library name="WorldEdit1">
     <CLASSES>
-      <root url="jar://C:/classicFactions 1710/plugins/WorldEdit.jar!/" />
+      <root url="jar://C:/mcservers/classicFactions 1710/plugins/WorldEdit.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
